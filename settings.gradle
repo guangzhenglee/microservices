@@ -1,0 +1,8 @@
+rootProject.name = 'microservices'
+include 'gateway'
+include 'bff'
+include 'account'
+include 'order'
+include 'config'
+include 'product'
+
