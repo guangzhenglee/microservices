@@ -1,0 +1,28 @@
+create table order
+(
+    id                      bigint       not null auto_increment comment '订单id',
+    order_number            varchar(64) comment '订单编号',
+    username                varchar(64) comment '用户帐号',
+    total_amount            decimal(10, 2) comment '订单总金额',
+    pay_amount              decimal(10, 2) comment '应付金额（实际支付金额）',
+    freight_amount          decimal(10, 2) comment '运费金额',
+    integration_amount      decimal(10, 2) comment '积分抵扣金额',
+    coupon_amount           decimal(10, 2) comment '优惠券抵扣金额',
+    pay_type                int(1) comment '支付方式：0->未支付；1->支付宝；2->微信',
+    source_type             int(1) comment '订单来源：0->PC订单；1->app订单',
+    status                  varchar(16) comment '订单状态',
+    order_type              int(1) comment '订单类型：0->正常订单；1->秒杀订单',
+    confirm_status          int(1) comment '确认收货状态：0->未确认；1->已确认',
+    delivery_number         varchar(64) comment '物流单号',
+    receiver_name           varchar(100) not null comment '收货人姓名',
+    receiver_phone          varchar(32)  not null comment '收货人电话',
+    receiver_detail_address varchar(200) comment '详细地址',
+    payment_time            datetime comment '支付时间',
+    delivery_time           datetime comment '发货时间',
+    receive_time            datetime comment '确认收货时间',
+    create_time             timestamp    not null default current_timestamp,
+    update_time             timestamp    not null default current_timestamp on update current_timestamp,
+    primary key (id),
+    constraint              idx_order_order_number key (order_number),
+    constraint              idx_order_username key (username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

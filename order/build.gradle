@@ -20,6 +20,9 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.cloud:spring-cloud-starter-kubernetes-client-all"
 
+    implementation 'mysql:mysql-connector-java:8.0.13'
+    implementation 'org.flywaydb:flyway-core:7.1.1'
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'io.micrometer:micrometer-registry-prometheus'
 
