@@ -1,4 +1,4 @@
-create table order
+create table `service_order`
 (
     id                      bigint       not null auto_increment comment '订单id',
     order_number            varchar(64) comment '订单编号',
@@ -21,8 +21,8 @@ create table order
     delivery_time           datetime comment '发货时间',
     receive_time            datetime comment '确认收货时间',
     create_time             timestamp    not null default current_timestamp,
-    update_time             timestamp    not null default current_timestamp on update current_timestamp,
+    updated_time            timestamp    not null default current_timestamp on update current_timestamp,
     primary key (id),
-    constraint              idx_order_order_number key (order_number),
-    constraint              idx_order_username key (username)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    index                   idx_order_order_number (order_number),
+    index                   idx_order_username (username)
+);
