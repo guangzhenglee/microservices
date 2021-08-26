@@ -5,4 +5,5 @@ include 'account'
 include 'order'
 include 'config'
 include 'product'
+include 'integration'
 

@@ -11,5 +11,51 @@ spring:
   flyway:
     locations: classpath:db/migration
 
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+      integrationFeignClient:
+        readTimeout: 2000
+
+service:
+  integration:
+    url: http://127.0.0.1:8082
+    name: integration
+
 server:
   port: 8081
+
+resilience4j.circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 20
+        slowCallRateThreshold: 70
+        slowCallDurationThreshold: 5000
+        permittedNumberOfCallsInHalfOpenState: 5
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 1
+        waitDurationInOpenState: 10000
+      slowClient:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 10000
+        permittedNumberOfCallsInHalfOpenState: 5
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 1
+        waitDurationInOpenState: 20000
+    instances:
+      IntegrationResilienceClient:
+        baseConfig: default
+      IntegrationResilienceClient_slowCircuitBreaker:
+        baseConfig: slowClient
+
+
+
+
